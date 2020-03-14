@@ -48,51 +48,43 @@ export default function Main() {
 		)
 	}
 	return (
-		<>
-			<StatusBar backgroundColor={backgroundColor} />
-			<ScrollView style={styles.container}>
-				<View style={{ margin: 20 }}>
-					<Image source={{ uri: 'https://via.placeholder.com/50x100' }} style={{ height: 50, width: 100, }} />
+		<Container>
+			<View style={{ margin: 20 }}>
+				<Image source={{ uri: 'https://via.placeholder.com/50x100' }} style={{ height: 50, width: 100, }} />
+			</View>
+			<View style={styles.summaryCard}>
+				<View>
+					<SummaryText text="102,170" subText="Confirmed" />
+					<SummaryText text="57,376" subText="Recovered" />
+					<SummaryText text="3,491" subText="Deaths" />
 				</View>
-				<View style={styles.summaryCard}>
-					<View>
-						<SummaryText text="102,170" subText="Confirmed" />
-						<SummaryText text="57,376" subText="Recovered" />
-						<SummaryText text="3,491" subText="Deaths" />
-					</View>
-					<View>
-						<PieChart
-							data={data}
-							width={300}
-							height={220}
-							chartConfig={chartConfig}
-							accessor="population"
-							backgroundColor="transparent"
-							paddingLeft="15"
-							hasLegend={false}
-						/>
-					</View>
-				</View>
-				<View style={{ marginTop: 20 }}>
-					<Text style={styles.dailyUpdatesText}>Daily Updates</Text>
-
-					<FlatList
-						data={[0, 1, 2, 4, 5, 6]}
-						renderItem={renderItem}
-						contentContainerStyle={{ marginTop: 20 }}
+				<View>
+					<PieChart
+						data={data}
+						width={300}
+						height={220}
+						chartConfig={chartConfig}
+						accessor="population"
+						backgroundColor="transparent"
+						paddingLeft="15"
+						hasLegend={false}
 					/>
 				</View>
+			</View>
+			<View style={{ marginTop: 20 }}>
+				<Text style={styles.dailyUpdatesText}>Daily Updates</Text>
 
-			</ScrollView>
-		</>
+				<FlatList
+					data={[0, 1, 2, 4, 5, 6]}
+					renderItem={renderItem}
+					contentContainerStyle={{ marginTop: 20 }}
+				/>
+			</View>
+		</Container>
 	)
 }
 
 const styles = {
-	container: {
-		backgroundColor,
-		flex: 1
-	},
 	summaryCard: {
 		height: 300,
 		width: '92%',
