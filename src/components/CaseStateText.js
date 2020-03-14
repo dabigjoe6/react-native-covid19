@@ -3,10 +3,10 @@ import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { textColor, primaryColor } from '../config';
 
-let color;
 
 export default function CaseStateText(props) {
 
+	let color;
 
 	switch (props.state) {
 		case "Confirmed":
@@ -25,7 +25,7 @@ export default function CaseStateText(props) {
 				type="material"
 				color={textColor.alternate}
 			/>
-			<Text style={styles.text}>{`${props.state}: ${props.value}`}</Text>
+			<Text style={[styles.text, { color }]}>{`${props.state}: ${props.value}`}</Text>
 		</View>
 	)
 }
@@ -37,7 +37,6 @@ const styles = {
 		alignItems: 'center'
 	},
 	text: {
-		color,
 		marginLeft: 10
 	}
 }

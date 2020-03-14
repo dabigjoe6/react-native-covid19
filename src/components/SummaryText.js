@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { textColor } from '../config';
 
-let subTextColor;
 
 export default function SummaryText(props) {
+
+	let subTextColor;
 
 	switch (props.subText) {
 		case 'Confirmed':
@@ -24,7 +25,7 @@ export default function SummaryText(props) {
 	return (
 		<View style={{ margin: 20 }}>
 			<Text style={styles.text}>{props.text}</Text>
-			<Text style={styles.subText}>{props.subText}</Text>
+			<Text style={[styles.subText, { color: subTextColor }]}>{props.subText}</Text>
 		</View>
 	)
 }
@@ -36,7 +37,6 @@ const styles = {
 		marginBottom: 5
 	},
 	subText: {
-		color: subTextColor,
 		fontWeight: 'bold'
 	}
 }
