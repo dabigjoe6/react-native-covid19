@@ -34,6 +34,7 @@ target 'react_native_covid19' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+
   target 'react_native_covid19Tests' do
     inherit! :search_paths
     # Pods for testing
