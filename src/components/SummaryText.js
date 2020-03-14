@@ -1,21 +1,22 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { textColor } from '../config';
 
 export default function SummaryText(props) {
 	let subTextColor;
 
 	switch (props.subText) {
 		case 'Confirmed':
-			subTextColor = '#F2B900';
+			subTextColor = textColor.confirmed;
 			break;
 		case 'Recovered':
-			subTextColor = "#00CC99";
+			subTextColor = textColor.recovered;
 			break;
 		case 'Deaths':
-			subTextColor = '#F76353';
+			subTextColor = textColor.deaths;
 			break;
 		default:
-			subTextColor = '#F2B900';
+			subTextColor = textColor.confirmed;
 			break;
 	}
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StatusBar, Image } from 'react-native';
+import { View, Text, StatusBar, Image, FlatList, ScrollView } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
-import { SummaryText } from '../components';
+import { SummaryText, DailyCard } from '../components';
 
-import { backgroundColor, primaryColor } from '../const';
+import { backgroundColor, primaryColor, textColor } from '../config';
 
 export default function Main() {
 	chartConfig = {
@@ -27,24 +27,30 @@ export default function Main() {
 		{
 			name: "Confirmed",
 			population: 102170,
-			color: "#F2B900",
+			color: textColor.confirmed,
 
 		},
 		{
 			name: "Recovered",
 			population: 57376,
-			color: "#00CC99",
+			color: textColor.recovered,
 		},
 		{
 			name: "Deaths",
 			population: 3491,
-			color: "#F76353",
+			color: textColor.deaths,
 		},
 	];
+
+	function renderItem({ item }) {
+		return (
+			<DailyCard />
+		)
+	}
 	return (
 		<>
 			<StatusBar backgroundColor={backgroundColor} />
-			<View style={styles.container}>
+			<ScrollView style={styles.container}>
 				<View style={{ margin: 20 }}>
 					<Image source={{ uri: 'https://via.placeholder.com/50x100' }} style={{ height: 50, width: 100, }} />
 				</View>
@@ -67,7 +73,17 @@ export default function Main() {
 						/>
 					</View>
 				</View>
-			</View>
+				<View style={{ marginTop: 20 }}>
+					<Text style={{ color: '#5BC0EB', fontWeight: 'bold', fontSize: 16, paddingLeft: 30 }}>Daily Updates</Text>
+
+					<FlatList
+						data={[0, 1, 2, 4, 5, 6]}
+						renderItem={renderItem}
+						contentContainerStyle={{ marginTop: 20 }}
+					/>
+				</View>
+
+			</ScrollView>
 		</>
 	)
 }
