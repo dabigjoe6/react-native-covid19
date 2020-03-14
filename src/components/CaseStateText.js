@@ -3,9 +3,10 @@ import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { textColor, primaryColor } from '../config';
 
+let color;
+
 export default function CaseStateText(props) {
 
-	let color;
 
 	switch (props.state) {
 		case "Confirmed":
@@ -17,14 +18,26 @@ export default function CaseStateText(props) {
 	}
 
 	return (
-		<View style={{ margin: 5, flexDirection: 'row', alignItems: 'center' }}>
+		<View style={styles.container}>
 			<Icon
 				// trending-up or trending-down based on the delta value
 				name="trending-up"
 				type="material"
-				color={primaryColor}
+				color={textColor.alternate}
 			/>
-			<Text style={{ color, marginLeft: 10 }}>{`${props.state}: ${props.value}`}</Text>
+			<Text style={styles.text}>{`${props.state}: ${props.value}`}</Text>
 		</View>
 	)
+}
+
+const styles = {
+	container: {
+		margin: 5,
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
+	text: {
+		color,
+		marginLeft: 10
+	}
 }

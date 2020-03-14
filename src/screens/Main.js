@@ -74,7 +74,7 @@ export default function Main() {
 					</View>
 				</View>
 				<View style={{ marginTop: 20 }}>
-					<Text style={{ color: '#5BC0EB', fontWeight: 'bold', fontSize: 16, paddingLeft: 30 }}>Daily Updates</Text>
+					<Text style={styles.dailyUpdatesText}>Daily Updates</Text>
 
 					<FlatList
 						data={[0, 1, 2, 4, 5, 6]}
@@ -104,6 +104,12 @@ const styles = {
 		alignItems: 'center',
 		padding: 20,
 		justifyContent: 'space-between'
+	},
+	dailyUpdatesText: {
+		color: textColor.alternate,
+		fontWeight: 'bold',
+		fontSize: 16,
+		paddingLeft: 30
 	}
 }
 
