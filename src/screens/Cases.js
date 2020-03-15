@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, KeyboardAvoidingView } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import { Container, CasesCard } from '../components';
 import MapView from 'react-native-maps';
@@ -8,14 +8,30 @@ import { textColor, base_url } from '../config';
 export default function Cases(props) {
 
 	const [search, setSearch] = useState("");
-	const [data, setData] = useState();
+	const [data, setData] = useState([]);
+
+	const [filteredData, setFilteredData] = useState([]);
 
 	const [forceListRerender, setForceListRerender] = useState(false);
 
 	function updateSearch(search) {
 		setSearch(search);
-		//filter data;
 	}
+
+	//filter data
+	useEffect(() => {
+		let newData = data.filter((item) => {
+			console.log("Includes: ", search);
+			if (item) {
+				return item.provinceState?.includes(search) || item.countryRegion?.includes(search);
+			}
+		})
+
+		setFilteredData(newData, () => {
+			setForceListRerender(!forceListRerender);
+		})
+
+	}, [search]);
 
 	function renderItem({ item }) {
 		return (
@@ -26,17 +42,9 @@ export default function Cases(props) {
 	useEffect(() => {
 		getCases();
 
-		console.log(props.route.params['case']);
-
-		console.log("I got CALLED");
 	}, [])
 
-	useEffect(() => {
-		console.log("Data changed")
-	}, [forceListRerender])
-
 	async function getCases() {
-		console.log("Loading !!!");
 		let caseType = props.route.params['case'];
 		let response = await fetch(base_url + '/' + caseType.toLowerCase());
 
@@ -46,7 +54,6 @@ export default function Cases(props) {
 			setData(result, () => {
 				setForceListRerender(!forceListRerender);
 			});
-
 		}
 	}
 
@@ -65,35 +72,39 @@ export default function Cases(props) {
 				onPress={() => props.navigation.goBack()}
 			/>
 			<Container>
-				<View style={styles.container}>
-					<MapView
-						style={styles.map}
-						initialRegion={{
-							latitude: 37.78825,
-							longitude: -122.4324,
-							latitudeDelta: 0.0922,
-							longitudeDelta: 0.0421,
-						}}
-					/>
-				</View>
-				<View style={{ flex: 1, padding: 20 }}>
-					<SearchBar
-						placeholder="Type City or province region"
-						onChangeText={updateSearch}
-						value={search}
-						containerStyle={styles.searchContainer}
-						inputContainerStyle={{ backgroundColor: 'transparent' }}
-						inputStyle={{ color: textColor.secondary }}
-						placeholderTextColor={textColor.secondary}
-						searchIcon={{ color: textColor.secondary }}
-					/>
-					<FlatList
-						data={data}
-						renderItem={renderItem}
-						extraData={forceListRerender}
-					/>
-				</View>
+				<KeyboardAvoidingView behavior="padding">
+					<View style={styles.container}>
+						<MapView
+							style={styles.map}
+							initialRegion={{
+								latitude: 37.78825,
+								longitude: -122.4324,
+								latitudeDelta: 0.0922,
+								longitudeDelta: 0.0421,
+							}}
+						/>
+					</View>
+					<View style={{ flex: 1, padding: 20 }}>
+						<SearchBar
+							placeholder="Type City or province region"
+							onChangeText={updateSearch}
+							value={search}
+							containerStyle={styles.searchContainer}
+							inputContainerStyle={{ backgroundColor: 'transparent' }}
+							inputStyle={{ color: textColor.secondary }}
+							placeholderTextColor={textColor.secondary}
+							searchIcon={{ color: textColor.secondary }}
+						/>
+						<FlatList
+							data={filteredData}
+							renderItem={renderItem}
+							extraData={forceListRerender}
+						/>
+					</View>
+				</KeyboardAvoidingView>
 			</Container>
+
+
 		</>
 	)
 }
@@ -101,7 +112,7 @@ export default function Cases(props) {
 const styles = {
 	container: {
 		flex: 1,
-		height: 350,
+		height: 280,
 		width: '100%'
 	},
 	map: {
