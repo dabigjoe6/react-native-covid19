@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, FlatList, KeyboardAvoidingView } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import { Container, CasesCard } from '../components';
@@ -7,6 +7,7 @@ import { textColor, base_url } from '../config';
 
 export default function Cases(props) {
 
+	const mapView = useRef(null);
 	const [search, setSearch] = useState("");
 	const [data, setData] = useState([]);
 
@@ -59,6 +60,14 @@ export default function Cases(props) {
 	function setMapLocation(latitude, longitude) {
 		setCurrentLatitude(latitude);
 		setCurrentLongitude(longitude);
+
+		mapView.current.animateToRegion({
+			latitude: currentLatitude,
+			longitude: currentLongitude,
+			latitudeDelta: 0.0922,
+			longitudeDelta: 0.0421,
+		}
+		)
 	}
 
 	useEffect(() => {
@@ -94,19 +103,29 @@ export default function Cases(props) {
 			/>
 			<View style={styles.container}>
 				<MapView
+					ref={mapView}
 					style={styles.map}
-					initialRegion={{
-						latitude: 35.8617,
-						longitude: 104.1954,
-						latitudeDelta: 0.0922,
-						longitudeDelta: 0.0421,
+					// initialRegion={{
+					// 	latitude: 35.8617,
+					// 	longitude: 104.1954,
+					// 	latitudeDelta: 0.0922,
+					// 	longitudeDelta: 0.0421,
+					// }}
+					initialCamera={{
+						center: {
+							latitude: 35.8617,
+							longitude: 104.1954,
+						},
+						pitch: 1,
+						heading: 0,
+						zoom: 1
 					}}
-					region={{
-						latitude: currentLatitude,
-						longitude: currentLongitude,
-						latitudeDelta: 0.0922,
-						longitudeDelta: 0.0421,
-					}}
+				// region={{
+				// 	latitude: currentLatitude,
+				// 	longitude: currentLongitude,
+				// 	latitudeDelta: 0.0922,
+				// 	longitudeDelta: 0.0421,
+				// }}
 				/>
 				{/* <View style={{}}> */}
 				<SearchBar
