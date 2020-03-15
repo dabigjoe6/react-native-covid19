@@ -21,7 +21,6 @@ export default function Cases(props) {
 	//filter data
 	useEffect(() => {
 		let newData = data.filter((item) => {
-			console.log("Includes: ", search);
 			if (item) {
 				return item.provinceState?.includes(search) || item.countryRegion?.includes(search);
 			}
