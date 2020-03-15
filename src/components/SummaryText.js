@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { textColor } from '../config';
+import { textColor, backgroundColor } from '../config';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default function SummaryText(props) {
@@ -23,10 +24,13 @@ export default function SummaryText(props) {
 	}
 
 	return (
-		<View style={{ margin: 20 }}>
-			<Text style={styles.text}>{props.text}</Text>
-			<Text style={[styles.subText, { color: subTextColor }]}>{props.subText}</Text>
+		<View style={{ marginVertical: 10, marginHorizontal: 20, backgroundColor, padding: 10, elevation: 10, borderRadius: 10 }}>
+			<TouchableOpacity onPress={props.onPress}>
+				<Text style={styles.text}>{props.text}</Text>
+				<Text style={[styles.subText, { color: subTextColor }]}>{props.subText}</Text>
+			</TouchableOpacity>
 		</View>
+
 	)
 }
 

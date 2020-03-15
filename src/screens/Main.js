@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StatusBar, Image, FlatList, ScrollView } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
-import { SummaryText, DailyCard } from '../components';
+import { SummaryText, DailyCard, Container } from '../components';
 
-import { backgroundColor, primaryColor, textColor } from '../config';
+import { backgroundColor, primaryColor, textColor, base_url } from '../config';
 
-export default function Main() {
+export default function Main(props) {
 	chartConfig = {
 		backgroundColor: "#e26a00",
 		backgroundGradientFrom: "#fb8c00",
@@ -23,28 +23,70 @@ export default function Main() {
 		}
 	}
 
+	const [cases, setCases] = useState({
+		Confirmed: 0,
+		Recovered: 0,
+		Deaths: 0
+	})
+
+	const [dailyUpdate, setDailyUpdate] = useState([]);
+
+	const [forceListRerender, setForceListRerender] = useState(false);
+
+	useEffect(() => {
+		fetchCases();
+		fetchDaily();
+	}, [])
+
+	async function fetchDaily() {
+		let response = await fetch(base_url + '/daily');
+
+		if (response.status == 200) {
+			let result = await response.json();
+
+			setDailyUpdate(result, () => {
+				setForceListRerender(!forceListRerender);
+			});
+		}
+	}
+	async function fetchCases() {
+		let response = await fetch(base_url);
+
+		if (response.status == 200) {
+			let result = await response.json();
+
+			setCases({
+				Confirmed: result.confirmed.value,
+				Recovered: result.recovered.value,
+				Deaths: result.deaths.value
+			});
+		}
+	}
+
+
+
 	const data = [
 		{
 			name: "Confirmed",
-			population: 102170,
+			population: cases.Confirmed ? cases.Confirmed : 0,
 			color: textColor.confirmed,
 
 		},
 		{
 			name: "Recovered",
-			population: 57376,
+			population: cases.Recovered ? cases.Recovered : 0,
 			color: textColor.recovered,
 		},
 		{
 			name: "Deaths",
-			population: 3491,
+			population: cases.Deaths ? cases.Deaths : 0,
 			color: textColor.deaths,
 		},
 	];
 
 	function renderItem({ item }) {
 		return (
-			<DailyCard />
+			<DailyCard case={item} />
 		)
 	}
 	return (
@@ -54,9 +96,9 @@ export default function Main() {
 			</View>
 			<View style={styles.summaryCard}>
 				<View>
-					<SummaryText text="102,170" subText="Confirmed" />
-					<SummaryText text="57,376" subText="Recovered" />
-					<SummaryText text="3,491" subText="Deaths" />
+					<SummaryText text={cases.Confirmed} subText="Confirmed" onPress={() => props.navigation.navigate("Cases", { case: 'Confirmed' })} />
+					<SummaryText text={cases.Recovered} subText="Recovered" onPress={() => props.navigation.navigate("Cases", { case: 'Recovered' })} />
+					<SummaryText text={cases.Deaths} subText="Deaths" onPress={() => props.navigation.navigate("Cases", { case: 'Deaths' })} />
 				</View>
 				<View>
 					<PieChart
@@ -75,9 +117,11 @@ export default function Main() {
 				<Text style={styles.dailyUpdatesText}>Daily Updates</Text>
 
 				<FlatList
-					data={[0, 1, 2, 4, 5, 6]}
+					data={dailyUpdate}
 					renderItem={renderItem}
-					contentContainerStyle={{ marginTop: 20 }}
+					contentContainerStyle={{ marginTop: 20, marginBottom: 20 }}
+					extraData={forceListRerender}
+					inverted
 				/>
 			</View>
 		</Container>

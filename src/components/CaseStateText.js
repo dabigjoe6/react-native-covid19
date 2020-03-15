@@ -17,11 +17,13 @@ export default function CaseStateText(props) {
 			break;
 	}
 
+	let iconName = props.value < props.delta ? 'trending-down' : 'trending-up'
+
 	return (
 		<View style={styles.container}>
 			<Icon
 				// trending-up or trending-down based on the delta value
-				name="trending-up"
+				name={iconName}
 				type="material"
 				color={textColor.alternate}
 			/>

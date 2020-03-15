@@ -8,3 +8,5 @@ export const textColor = {
 	secondary: '#D1D1D1',
 	alternate: '#5BC0EB'
 }
+
+export const base_url = 'https://covid19.mathdro.id/api/';

@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import CaseStateText from './CaseStateText';
 import { primaryColor, textColor } from '../config';
 
-export default function DailyCard() {
+export default function DailyCard(props) {
 	return (
 		<View style={styles.container}>
 			<Icon
@@ -14,12 +14,21 @@ export default function DailyCard() {
 				color={textColor.alternate}
 			/>
 			<View style={{ flex: 6 }}>
-				<Text style={{ color: 'white' }}>07 March 2020</Text>
+				<Text style={{ color: 'white' }}>{(new Date(props.case.reportDateString)).toDateString()}</Text>
 				<View style={{ flexDirection: 'row' }}>
-					<CaseStateText state="Confirmed" value="368" />
-					<CaseStateText state="Recovered" value="1510" />
+					<CaseStateText
+						state="Confirmed"
+						value={props.case.totalConfirmed ? props.case.totalConfirmed : 0}
+						delta={props.case.deltaConfirmed ? props.case.deltaConfirmed : 0}
+					/>
+					<CaseStateText
+						state="Recovered"
+						value={props.case.totalRecovered ? props.case.totalRecovered : 0}
+						delta={props.case.deltaRecovered ? props.case.deltaRecovered : 0}
+					/>
 				</View>
-				<Text style={styles.descriptionText}>Total 80,153 cases on China and 344,554 on the other location </Text>
+				<Text style={styles.descriptionText}>
+					{`Total ${props.case.mainlandChina ? props.case.mainlandChina : 0} cases in China and ${props.case.otherLocation ? props.case.otherLocation : 0} in other locations`}</Text>
 			</View>
 		</View>
 	)
@@ -35,6 +44,6 @@ const styles = {
 	},
 	descriptionText: {
 		color: textColor.secondary,
-		fontSize: 11
+		fontSize: 12
 	}
 }
