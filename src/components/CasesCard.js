@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { textColor } from '../config';
+import { textColor, primaryColor } from '../config';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function CasesCard(props) {
 
@@ -27,21 +28,24 @@ export default function CasesCard(props) {
 	}
 
 	return (
-		<View style={styles.container}>
-			{/* icon change based on case type */}
-			<Icon
-				containerStyle={{ flex: 1 }}
-				name={iconName}
-				type="antdesign"
-				color={color}
-			/>
-			<View style={{ flex: 5, padding: 10 }}>
-				<Text style={styles.regionText}>{`${provinceState} ${countryRegion}`}</Text>
-				{/* //text color changes based on case type */}
-				<Text style={[styles.caseTypeText, { color }]}>{`${props.type} ${props.case[props.type.toLowerCase()]}`}</Text>
-				<Text style={{ color: textColor.secondary }}>{`Last updated ${(new Date(props.case.lastUpdate)).toDateString()}`}</Text>
+		<TouchableOpacity onPress={props.onPress}>
+			<View style={styles.container}>
+				{/* icon change based on case type */}
+				<Icon
+					containerStyle={{ flex: 1 }}
+					name={iconName}
+					type="antdesign"
+					color={color}
+				/>
+				<View style={{ flex: 5, padding: 10 }}>
+					<Text style={styles.regionText}>{`${provinceState} ${countryRegion}`}</Text>
+					{/* //text color changes based on case type */}
+					<Text style={[styles.caseTypeText, { color }]}>{`${props.type} ${props.case[props.type.toLowerCase()]}`}</Text>
+					<Text style={{ color: textColor.secondary }}>{`Last updated ${(new Date(props.case.lastUpdate)).toDateString()}`}</Text>
+				</View>
 			</View>
-		</View>
+		</TouchableOpacity>
+
 	)
 }
 
@@ -50,7 +54,10 @@ const styles = {
 		flexDirection: 'row',
 		alignItems: 'center',
 		width: '100%',
-		marginVertical: 20
+		backgroundColor: primaryColor,
+		marginVertical: 5,
+		borderRadius: 5,
+		elevation: 10
 	},
 	regionText: {
 		color: 'white',
