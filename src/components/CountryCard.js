@@ -3,7 +3,9 @@ import { Icon } from 'react-native-elements';
 import { View, Text } from 'react-native';
 import CaseStateText from './CaseStateText';
 import { theme } from '../context/Theme';
+import AnimateNumber from 'react-native-animate-number'
 import { primaryColor, textColor } from '../config';
+
 
 export default function CountryCard(props) {
 
@@ -45,7 +47,9 @@ export default function CountryCard(props) {
 
 		return (
 			<View style={{ marginHorizontal: 25, alignItems: 'center', marginVertical: 20 }}>
-				<Text style={{ color, fontSize: 20, fontWeight: 'bold' }}>{props.value}</Text>
+				<AnimateNumber style={{ color, fontSize: 20, fontWeight: 'bold' }} value={props.value} formatter={(val) => {
+					return parseFloat(val).toFixed(0)
+				}} />
 				<Text style={{ color, fontSize: 11 }}>{props.case}</Text>
 			</View>
 		)

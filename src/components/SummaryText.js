@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AnimateNumber from 'react-native-animate-number'
 import { theme } from '../context/Theme';
 
 
@@ -39,7 +40,10 @@ export default function SummaryText(props) {
 	return (
 		<View style={{ marginVertical: 10, marginHorizontal: 20, backgroundColor: activeTheme.backgroundColor, padding: 10, elevation: 1, borderRadius: 10 }}>
 			<TouchableOpacity onPress={props.onPress}>
-				<Text style={styles.text}>{props.text}</Text>
+				<AnimateNumber style={styles.text} value={props.text} formatter={(val) => {
+					return parseFloat(val).toFixed(0)
+				}}
+				/>
 				<Text style={[styles.subText, { color: subTextColor }]}>{props.subText}</Text>
 			</TouchableOpacity>
 		</View>
