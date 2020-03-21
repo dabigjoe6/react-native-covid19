@@ -27,7 +27,7 @@ export default function Cases(props) {
 		},
 		searchContainer: {
 			zIndex: 90,
-			backgroundColor: activeTheme.darkTheme ? '#ffffff70' : '#00000070',
+			backgroundColor: activeTheme.darkTheme ? '#00000070' : '#ffffff70',
 			width: '78%',
 			position: 'absolute',
 			right: 10,
@@ -150,7 +150,7 @@ export default function Cases(props) {
 					/>
 				}
 				containerStyle={{ position: 'absolute', top: 20, left: 20, zIndex: 100 }}
-				buttonStyle={{ backgroundColor: activeTheme.darkTheme ? '#ffffff70' : '#00000070', padding: 12 }}
+				buttonStyle={{ backgroundColor: activeTheme.darkTheme ? '#00000070' : '#ffffff70', padding: 12 }}
 				onPress={() => props.navigation.goBack()}
 			/>
 			<View style={styles.container}>
