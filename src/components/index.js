@@ -6,3 +6,4 @@ export { default as CasesCard } from './CasesCard';
 export { default as AdviceCard } from './AdviceCard';
 export { default as SymptomCard } from './SymptomCard';
 export { default as BackBtn } from './BackBtn';
+export { default as Bulletin } from './Bulletin';
