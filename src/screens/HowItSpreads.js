@@ -1,9 +1,8 @@
 import React, { useRef, useContext } from 'react'
-import { View, Text, Image, Dimensions, ImageBackground } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { View, Text, Image, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { theme } from '../context/Theme';
-import { Container } from '../components';
+import { Container, BackBtn } from '../components';
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -11,8 +10,6 @@ const WINDOW_WIDTH = Dimensions.get('window').width;
 export default function HowItSpreads(props) {
 
 	const _carousel = useRef(null);
-
-	const activeTheme = useContext(theme).globalTheme;
 
 	const styles = {
 		overlayContainer: {
@@ -22,20 +19,22 @@ export default function HowItSpreads(props) {
 			backgroundColor: '#00000090',
 			position: 'absolute',
 			bottom: 0,
-			padding: 20
+			padding: 20,
+			borderBottomLeftRadius: 20,
+			borderBottomRightRadius: 20
 		}
 	}
 
 	function HowItSpreadsCard(props) {
 		return (
-			<View style={{ alignItems: 'center', height: WINDOW_HEIGHT - 150, width: 330, alignSelf: 'center' }}>
+			<View style={{ alignItems: 'center', height: WINDOW_HEIGHT - 150, width: 330, alignSelf: 'center', }}>
 				<Image
 					source={props.backgroundImage}
-					style={{ height: '70%', width: '100%' }}
+					style={{ height: '70%', width: '100%', borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
 				/>
 				<Image
 					source={props.backgroundImage}
-					style={{ height: '30%', width: '100%' }}
+					style={{ height: '30%', width: '100%', borderBottomRightRadius: 20, borderBottomLeftRadius: 20 }}
 					blurRadius={50}
 				/>
 				<View style={styles.overlayContainer}>
@@ -64,18 +63,7 @@ export default function HowItSpreads(props) {
 	}
 	return (
 		<Container>
-			<Button
-				icon={
-					<Icon
-						name="arrow-back"
-						type="material"
-						color={activeTheme.textColor.secondary}
-					/>
-				}
-				containerStyle={{ position: 'absolute', top: 20, left: 20, zIndex: 100 }}
-				buttonStyle={{ backgroundColor: activeTheme.darkTheme ? '#00000070' : '#ffffff70', padding: 12 }}
-				onPress={() => props.navigation.goBack()}
-			/>
+			<BackBtn onPress={() => props.navigation.goBack()} />
 			<View style={{ marginTop: 20, }}>
 				<Carousel
 					ref={_carousel}
@@ -101,6 +89,10 @@ export default function HowItSpreads(props) {
 					renderItem={renderItem}
 					sliderWidth={WINDOW_WIDTH}
 					itemWidth={WINDOW_WIDTH}
+					loop
+					autoplay
+					lockScrollWhileSnapping
+					autoplayInterval={7000}
 				/>
 			</View>
 		</Container>
