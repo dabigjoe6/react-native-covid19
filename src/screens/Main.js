@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, StatusBar, Image, FlatList, ScrollView } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { PieChart } from 'react-native-chart-kit';
-import { SummaryText, DailyCard, Container } from '../components';
+import { SummaryText, DailyCard, Container, CountryCard } from '../components';
 import { theme } from '../context/Theme';
 
 import { base_url } from '../config';
@@ -60,13 +60,32 @@ export default function Main(props) {
 
 	const [dailyUpdate, setDailyUpdate] = useState([]);
 
+	const [ngLastUpdated, setNgLastUpdated] = useState("");
+	const [ngConfirmed, setNgConfirmed] = useState(0);
+	const [ngDeaths, setNgDeaths] = useState(0);
+	const [ngRecovered, setNgRecovered] = useState(0);
+
 	const [forceListRerender, setForceListRerender] = useState(false);
 
 	useEffect(() => {
 		fetchCases();
 		fetchDaily();
+		fetchNgData();
+
 	}, [])
 
+	async function fetchNgData() {
+		let response = await fetch(base_url + '/countries/Nigeria');
+
+		if (response.status == 200) {
+			let result = await response.json();
+
+			setNgLastUpdated(result.lastUpdate);
+			setNgConfirmed(result.confirmed.value);
+			setNgDeaths(result.deaths.value);
+			setNgRecovered(result.recovered.value);
+		}
+	}
 	async function fetchDaily() {
 		let response = await fetch(base_url + '/daily');
 
@@ -140,6 +159,8 @@ export default function Main(props) {
 				</View>
 			</View>
 			<View style={{ marginTop: 20, paddingBottom: 100 }}>
+
+				<CountryCard country="Nigeria" lastUpdated={ngLastUpdated} confirmed={ngConfirmed} deaths={ngDeaths} recovered={ngRecovered} />
 				<Text style={styles.dailyUpdatesText}>Recent Updates</Text>
 
 				<FlatList
