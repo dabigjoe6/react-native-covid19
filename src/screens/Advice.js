@@ -11,7 +11,7 @@ export default function Advice(props) {
 
 	return (
 		<Container>
-			<View style={{ padding: 20 }}>
+			<View style={{ padding: 20, paddingBottom: 100 }}>
 				<Text style={{ fontSize: 30, color: activeTheme.textColor.alternate, marginBottom: 30 }}>Information Center</Text>
 
 				<AdviceCard
@@ -25,7 +25,7 @@ export default function Advice(props) {
 				<AdviceCard
 					onPress={() => props.navigation.navigate("Symptoms")}
 					icon={
-						<Icon name="air" type="entypo" color="gold" />
+						<Icon name="air" type="entypo" color="orange" />
 					}
 					title="Symptoms"
 					description="Symptoms of Covid-19"
@@ -37,6 +37,14 @@ export default function Advice(props) {
 					}
 					title="Prevention and treatment"
 					description="Steps taken to prevent Covid-19"
+				/>
+				<AdviceCard
+					onPress={() => props.navigation.navigate("WhatToDo")}
+					icon={
+						<Icon name="question" type="foundation" color="gold" />
+					}
+					title="What to do"
+					description="What to do if you get the virus"
 				/>
 			</View>
 		</Container>
