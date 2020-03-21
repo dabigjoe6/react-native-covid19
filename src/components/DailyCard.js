@@ -1,20 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Icon } from 'react-native-elements';
 import { View, Text } from 'react-native';
 import CaseStateText from './CaseStateText';
+import { theme } from '../context/Theme';
 import { primaryColor, textColor } from '../config';
 
 export default function DailyCard(props) {
+
+	const activeTheme = useContext(theme).globalTheme;
+
+	const styles = {
+		container: {
+			flexDirection: 'row',
+			alignItems: 'center',
+			paddingHorizontal: 10,
+			paddingVertical: 5,
+			backgroundColor: activeTheme.primaryColor
+		},
+		descriptionText: {
+			color: activeTheme.textColor.secondary,
+			fontSize: 12
+		}
+	}
+
 	return (
 		<View style={styles.container}>
-			<Icon
-				containerStyle={{ flex: 1 }}
-				name="timelapse"
-				type="material"
-				color={textColor.alternate}
-			/>
+			<View style={{ flex: 1 }}>
+				<Icon
+					containerStyle={{ marginBottom: 0, padding: 0, margin: 0 }}
+					name="timelapse"
+					type="material"
+					color={activeTheme.textColor.alternate}
+				/>
+				<View style={{ backgroundColor: 'transparent', width: '50%', height: 50, borderRightWidth: 0.8, borderRightColor: activeTheme.textColor.alternate }}>
+
+				</View>
+			</View>
 			<View style={{ flex: 6 }}>
-				<Text style={{ color: 'white' }}>{(new Date(props.case.reportDateString)).toDateString()}</Text>
+				<Text style={{ color: activeTheme.textColor.normal }}>{(new Date(props.case.reportDateString)).toDateString()}</Text>
 				<View style={{ flexDirection: 'row' }}>
 					<CaseStateText
 						state="Confirmed"
@@ -28,22 +51,9 @@ export default function DailyCard(props) {
 					/>
 				</View>
 				<Text style={styles.descriptionText}>
-					{`Total ${props.case.mainlandChina ? props.case.mainlandChina : 0} cases in China and ${props.case.otherLocation ? props.case.otherLocation : 0} in other locations`}</Text>
+					{`Total ${props.case.mainlandChina ? props.case.mainlandChina : 0} cases in China and ${props.case.otherLocations ? props.case.otherLocations : 0} in other locations`}</Text>
 			</View>
-		</View>
+		</View >
 	)
 }
 
-const styles = {
-	container: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		padding: 10,
-		marginBottom: 1,
-		backgroundColor: primaryColor
-	},
-	descriptionText: {
-		color: textColor.secondary,
-		fontSize: 12
-	}
-}

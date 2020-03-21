@@ -1,11 +1,50 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { View, Text, FlatList, KeyboardAvoidingView } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import { Container, CasesCard } from '../components';
-import MapView, { AnimatedRegion, Animated } from 'react-native-maps';
+import MapView, { AnimatedRegion, Animated, Marker } from 'react-native-maps';
+import { theme } from '../context/Theme';
 import { textColor, base_url } from '../config';
 
 export default function Cases(props) {
+
+	const activeTheme = useContext(theme).globalTheme;
+	const darkTheme = useContext(theme).darkTheme;
+
+	const styles = {
+		container: {
+			height: 250,
+			width: '100%',
+			position: 'relative',
+			top: 0,
+			zIndex: 10,
+		},
+		map: {
+			position: 'absolute',
+			top: 0,
+			width: '100%',
+			height: '100%'
+		},
+		searchContainer: {
+			zIndex: 90,
+			backgroundColor: activeTheme.darkTheme ? '#ffffff70' : '#00000070',
+			width: '78%',
+			position: 'absolute',
+			right: 10,
+			top: 20,
+			// backgroundColor: 'transparent',
+			borderWidth: 0,
+			borderTopWidth: 0,
+			borderBottomWidth: 0,
+			borderRadius: 10,
+			padding: 0,
+			paddingHorizontal: 20,
+			borderColor: activeTheme.textColor.secondary,
+			borderBottomColor: activeTheme.textColor.secondary,
+			borderTopColor: activeTheme.textColor.secondary
+		}
+	}
+
 
 	const mapView = useRef(null);
 	const [search, setSearch] = useState("");
@@ -61,13 +100,15 @@ export default function Cases(props) {
 		setCurrentLatitude(latitude);
 		setCurrentLongitude(longitude);
 
-		mapView.current.animateToRegion({
-			latitude: currentLatitude,
-			longitude: currentLongitude,
-			latitudeDelta: 0.0922,
-			longitudeDelta: 0.0421,
-		}
-		)
+		mapView.current.animateCamera({
+			center: {
+				latitude: currentLatitude,
+				longitude: currentLongitude,
+			},
+			pitch: 1,
+			heading: 0,
+			zoom: 3
+		})
 	}
 
 	useEffect(() => {
@@ -87,6 +128,17 @@ export default function Cases(props) {
 		}
 	}
 
+	let markerColor;
+	switch (props.route.params['case']) {
+		case 'Confirmed':
+			markerColor = activeTheme.textColor.confirmed;
+			break;
+		case 'Recovered':
+			markerColor = activeTheme.textColor.recovered;
+			break;
+		case 'Deaths':
+			markerColor = activeTheme.textColor.deaths;
+	}
 	return (
 		<>
 			<Button
@@ -94,23 +146,17 @@ export default function Cases(props) {
 					<Icon
 						name="arrow-back"
 						type="material"
-						color={textColor.secondary}
+						color={activeTheme.textColor.secondary}
 					/>
 				}
 				containerStyle={{ position: 'absolute', top: 20, left: 20, zIndex: 100 }}
-				buttonStyle={{ backgroundColor: '#00000070', padding: 12 }}
+				buttonStyle={{ backgroundColor: activeTheme.darkTheme ? '#ffffff70' : '#00000070', padding: 12 }}
 				onPress={() => props.navigation.goBack()}
 			/>
 			<View style={styles.container}>
 				<MapView
 					ref={mapView}
 					style={styles.map}
-					// initialRegion={{
-					// 	latitude: 35.8617,
-					// 	longitude: 104.1954,
-					// 	latitudeDelta: 0.0922,
-					// 	longitudeDelta: 0.0421,
-					// }}
 					initialCamera={{
 						center: {
 							latitude: 35.8617,
@@ -120,13 +166,18 @@ export default function Cases(props) {
 						heading: 0,
 						zoom: 1
 					}}
-				// region={{
-				// 	latitude: currentLatitude,
-				// 	longitude: currentLongitude,
-				// 	latitudeDelta: 0.0922,
-				// 	longitudeDelta: 0.0421,
-				// }}
-				/>
+				>
+					{data.map((item) => {
+						return (
+							<Marker
+								coordinate={{
+									longitude: item.long,
+									latitude: item.lat
+								}}
+								pinColor={markerColor}
+							/>)
+					})}
+				</MapView>
 				{/* <View style={{}}> */}
 				<SearchBar
 					placeholder="Type City or province region"
@@ -134,9 +185,9 @@ export default function Cases(props) {
 					value={search}
 					containerStyle={styles.searchContainer}
 					inputContainerStyle={{ backgroundColor: 'transparent' }}
-					inputStyle={{ color: textColor.secondary }}
-					placeholderTextColor={textColor.secondary}
-					searchIcon={{ color: textColor.secondary }}
+					inputStyle={{ color: activeTheme.textColor.secondary }}
+					placeholderTextColor={activeTheme.textColor.secondary}
+					searchIcon={{ color: activeTheme.textColor.secondary }}
 				/>
 				{/* </View> */}
 			</View>
@@ -156,36 +207,4 @@ export default function Cases(props) {
 
 		</>
 	)
-}
-
-const styles = {
-	container: {
-		height: 250,
-		width: '100%',
-		position: 'relative',
-		top: 0,
-		zIndex: 10,
-	},
-	map: {
-		position: 'absolute',
-		top: 0,
-		width: '100%',
-		height: '100%'
-	},
-	searchContainer: {
-		zIndex: 90,
-		backgroundColor: '#00000070',
-		width: '78%',
-		position: 'absolute',
-		right: 10,
-		top: 20,
-		// backgroundColor: 'transparent',
-		borderWidth: 1,
-		borderRadius: 10,
-		padding: 0,
-		paddingHorizontal: 20,
-		borderColor: textColor.secondary,
-		borderBottomColor: textColor.secondary,
-		borderTopColor: textColor.secondary
-	}
 }

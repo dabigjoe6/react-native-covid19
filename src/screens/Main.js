@@ -1,11 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, StatusBar, Image, FlatList, ScrollView } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { PieChart } from 'react-native-chart-kit';
 import { SummaryText, DailyCard, Container } from '../components';
+import { theme } from '../context/Theme';
 
-import { backgroundColor, primaryColor, textColor, base_url } from '../config';
+import { base_url } from '../config';
 
 export default function Main(props) {
+
+	const CustomPieChart = Animatable.createAnimatableComponent(PieChart);
+
+	const activeTheme = useContext(theme).globalTheme;
+
+	const styles = {
+		summaryCard: {
+			height: 300,
+			width: '92%',
+			backgroundColor: activeTheme.primaryColor,
+			alignSelf: 'center',
+			borderRadius: 7,
+			elevation: 1,
+			flexDirection: 'row',
+			alignItems: 'center',
+			padding: 20,
+			justifyContent: 'space-between',
+			marginTop: 10
+		},
+		dailyUpdatesText: {
+			color: activeTheme.textColor.alternate,
+			fontWeight: 'bold',
+			fontSize: 16,
+			paddingLeft: 30
+		}
+	}
+
 	chartConfig = {
 		backgroundColor: "#e26a00",
 		backgroundGradientFrom: "#fb8c00",
@@ -69,18 +98,18 @@ export default function Main(props) {
 		{
 			name: "Confirmed",
 			population: cases.Confirmed ? cases.Confirmed : 0,
-			color: textColor.confirmed,
+			color: activeTheme.textColor.confirmed,
 
 		},
 		{
 			name: "Recovered",
 			population: cases.Recovered ? cases.Recovered : 0,
-			color: textColor.recovered,
+			color: activeTheme.textColor.recovered,
 		},
 		{
 			name: "Deaths",
 			population: cases.Deaths ? cases.Deaths : 0,
-			color: textColor.deaths,
+			color: activeTheme.textColor.deaths,
 		},
 	];
 
@@ -91,9 +120,6 @@ export default function Main(props) {
 	}
 	return (
 		<Container>
-			<View style={{ margin: 20 }}>
-				<Image source={{ uri: 'https://via.placeholder.com/50x100' }} style={{ height: 50, width: 100, }} />
-			</View>
 			<View style={styles.summaryCard}>
 				<View>
 					<SummaryText text={cases.Confirmed} subText="Confirmed" onPress={() => props.navigation.navigate("Cases", { case: 'Confirmed' })} />
@@ -101,7 +127,7 @@ export default function Main(props) {
 					<SummaryText text={cases.Deaths} subText="Deaths" onPress={() => props.navigation.navigate("Cases", { case: 'Deaths' })} />
 				</View>
 				<View>
-					<PieChart
+					<CustomPieChart
 						data={data}
 						width={300}
 						height={220}
@@ -113,11 +139,11 @@ export default function Main(props) {
 					/>
 				</View>
 			</View>
-			<View style={{ marginTop: 20 }}>
-				<Text style={styles.dailyUpdatesText}>Daily Updates</Text>
+			<View style={{ marginTop: 20, paddingBottom: 100 }}>
+				<Text style={styles.dailyUpdatesText}>Recent Updates</Text>
 
 				<FlatList
-					data={dailyUpdate}
+					data={dailyUpdate.reverse().slice(0, 3)}
 					renderItem={renderItem}
 					contentContainerStyle={{ marginTop: 20, marginBottom: 20 }}
 					extraData={forceListRerender}
@@ -126,26 +152,5 @@ export default function Main(props) {
 			</View>
 		</Container>
 	)
-}
-
-const styles = {
-	summaryCard: {
-		height: 300,
-		width: '92%',
-		backgroundColor: primaryColor,
-		alignSelf: 'center',
-		borderRadius: 7,
-		elevation: 5,
-		flexDirection: 'row',
-		alignItems: 'center',
-		padding: 20,
-		justifyContent: 'space-between'
-	},
-	dailyUpdatesText: {
-		color: textColor.alternate,
-		fontWeight: 'bold',
-		fontSize: 16,
-		paddingLeft: 30
-	}
 }
 

@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ScrollView, StatusBar, KeyboardAvoidingView } from 'react-native';
-import { backgroundColor } from '../config';
+import { theme } from '../context/Theme';
 
 export default function Container(props) {
+
+	const activeTheme = useContext(theme).globalTheme
+	const darkTheme = useContext(theme).darkTheme
+
 	return (
 		<>
-			<StatusBar backgroundColor={backgroundColor} />
-			<ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
+			<StatusBar backgroundColor={activeTheme.backgroundColor} barStyle={activeTheme.darkTheme ? "light-content" : "dark-content"} />
+			<ScrollView style={[styles.container, { backgroundColor: activeTheme.backgroundColor }]} contentContainerStyle={{ flexGrow: 1 }}>
 				{props.children}
 			</ScrollView>
 		</>
@@ -15,7 +19,6 @@ export default function Container(props) {
 
 const styles = {
 	container: {
-		backgroundColor,
-		flex: 1
+		flex: 1,
 	},
 }
