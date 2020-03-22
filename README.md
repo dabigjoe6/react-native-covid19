@@ -13,6 +13,7 @@ the Chinese Centre for Disease Control and Prevention (ECDC) and the Nigeria Cen
 
 # 📸 Screenshots
 
-# Contributor(s)
+
+# 🤓 Contributor(s)
 - Joseph Olabisi [![Twitter Follow](https://img.shields.io/twitter/follow/aceg00ber?label=Follow&style=social)](https://twitter.com/acerg00ber)
 - Oyefeso Oluwatunmise [![Twitter Follow](https://img.shields.io/twitter/follow/oyefesotunmise?label=Follow&style=social)](https://twitter.com/oyefesotunmise)
