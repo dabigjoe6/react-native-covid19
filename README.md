@@ -25,7 +25,7 @@ the Chinese Centre for Disease Control and Prevention (ECDC) and the Nigeria Cen
 &nbsp;
 <img src="screenshots/vn5.png" width="300" style="border-radius: 15px">
 &nbsp;
-<img src="screenshots/vn6.png" width="300" style="border-radius: 15px">
+<img src="screenshots/vn 6.png" width="300" style="border-radius: 15px">
 </div>
 
 # 🤓 Contributor(s)
