@@ -4,3 +4,7 @@ export { default as CaseStateText } from './CaseStateText';
 export { default as Container } from './Container';
 export { default as CasesCard } from './CasesCard';
 export { default as AdviceCard } from './AdviceCard';
+export { default as SymptomCard } from './SymptomCard';
+export { default as BackBtn } from './BackBtn';
+export { default as Bulletin } from './Bulletin';
+export { default as CountryCard } from './CountryCard';

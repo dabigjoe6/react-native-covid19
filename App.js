@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main, Cases, Advice, Prevention, Symptoms, HowItSpreads, Settings } from './src/screens';
+import { Main, Cases, Advice, Prevention, Symptoms, HowItSpreads, Settings, WhatToDo } from './src/screens';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -28,6 +28,7 @@ function AdviceStack() {
 			<Stack.Screen name="HowItSpreads" component={HowItSpreads} />
 			<Stack.Screen name="Symptoms" component={Symptoms} />
 			<Stack.Screen name="Prevention" component={Prevention} />
+			<Stack.Screen name="WhatToDo" component={WhatToDo} />
 		</Stack.Navigator>
 	)
 }
@@ -78,7 +79,7 @@ export default function App() {
 					headerMode="none"
 				>
 					<Tab.Screen name="Stats" component={StatsStack} />
-					{/* <Tab.Screen name="Advice" component={AdviceStack} /> */}
+					<Tab.Screen name="Advice" component={AdviceStack} />
 					<Tab.Screen name="Settings" component={Settings} />
 				</Tab.Navigator>
 			</NavigationContainer>
