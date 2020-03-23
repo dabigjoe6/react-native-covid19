@@ -12,7 +12,23 @@ the Chinese Centre for Disease Control and Prevention (ECDC) and the Nigeria Cen
 - Global hotlines
 
 # 📸 Screenshots
+<div style="background-color:rgb(169,169,169); text-align:center">
+<img src="screenshots/vn1.png" width="300" style="border-radius: 15px">
+&nbsp;
+<img src="screenshots/vn2.png" width="300" style="border-radius: 15px">
+</div>
 
+<div style="background-color:rgb(169,169,169); text-align:center">
+<img src="screenshots/vn3.png" width="300" style="border-radius: 15px">
+&nbsp;
+<img src="screenshots/vn4.png" width="300" style="border-radius: 15px">
+</div>
+
+<div style="background-color:rgb(169,169,169); text-align:center">
+<img src="screenshots/vn5.png" width="300" style="border-radius: 15px">
+&nbsp;
+<img src="screenshots/vn 6.png" width="300" style="border-radius: 15px">
+</div>
 
 # 🤓 Contributor(s)
 - Joseph Olabisi [![Twitter Follow](https://img.shields.io/twitter/follow/aceg00ber?label=Follow&style=social)](https://twitter.com/acerg00ber)
