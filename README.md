@@ -6,6 +6,9 @@ A React Native app created to track COVID-19 cases and also provide users with i
 The information we provide is collated verified and reputable institutions such as World Health Organization (WHO), the US Centers for Disease Control and Prevention (CDC), 
 the Chinese Centre for Disease Control and Prevention (ECDC) and the Nigeria Center for Disease Control (NCDC).
 
+# ⬇ Download Now !
+https://drive.google.com/file/d/15QFX5BbHk5dYeUjijdsccI2x_MpBgg1O/view
+
 # ⚙ Features
 - See all cases statistics
 - Get latest updates from trusted sources
