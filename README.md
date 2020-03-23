@@ -11,6 +11,10 @@ the Chinese Centre for Disease Control and Prevention (ECDC) and the Nigeria Cen
 - Get latest updates from trusted sources
 - Global hotlines
 
+# 🧾 To-Do List
+- Curate global hotlines
+- Get latest updates from verified sources 
+
 # 📸 Screenshots
 <div style="background-color:rgb(169,169,169); text-align:center">
 <img src="screenshots/vn1.png" width="300" style="border-radius: 15px">
@@ -24,6 +28,11 @@ the Chinese Centre for Disease Control and Prevention (ECDC) and the Nigeria Cen
 <img src="screenshots/Covid19.gif" width="300" style="border-radius: 15px">
 </div>
 
+Ps: Ignore the glitchy GIF, the app is much sleeker, trust me 😉
+
 # 🤓 Contributor(s)
 - Joseph Olabisi [![Twitter Follow](https://img.shields.io/twitter/follow/aceg00ber?label=Follow&style=social)](https://twitter.com/acerg00ber)
 - Oyefeso Oluwatunmise [![Twitter Follow](https://img.shields.io/twitter/follow/oyefesotunmise?label=Follow&style=social)](https://twitter.com/oyefesotunmise)
+
+# 🧾 License - MIT License
+Copyright (c) 2020 Vironitor - Released under the <a href="https://github.com/Blac-Panda/react-native-covid19/blob/master/LICENSE.txt">MIT license.</a>
