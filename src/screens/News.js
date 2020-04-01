@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, Image, ImageBackground, Dimensions } from 'react-native';
 import { Container } from '../components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { location } from '../context/Location';
 
 export default function News(props) {
 
 	const [news, setNews] = useState([]);
 
 	const [forceListRender, setForceListRender] = useState(false);
+
+	const currentLocation = useContext(location).locationContext;
+
 
 	const WINDOW_WIDTH = Dimensions.get('window').width;
 
@@ -21,7 +25,7 @@ export default function News(props) {
 	}, [news]);
 
 	async function fetchNews() {
-		let response = await fetch('https://newsapi.org/v2/top-headlines?q=COVID&sortBy=publishedAt&apiKey=fc45533b832c4702b9a43713d12dc410&country=ng');
+		let response = await fetch('https://newsapi.org/v2/top-headlines?q=COVID&sortBy=publishedAt&apiKey=fc45533b832c4702b9a43713d12dc410&country=' + currentLocation.countryCode.toLowerCase());
 
 		if (response.status === 200) {
 			let result = await response.json();
