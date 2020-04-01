@@ -51,7 +51,7 @@ export default function CasesCard(props) {
 	}
 
 	return (
-		<TouchableOpacity onPress={props.onPress}>
+		<TouchableOpacity activeOpacity={0.8} onPress={props.onPress}>
 			<View style={[styles.container, { backgroundColor: activeTheme.primaryColor, }]}>
 				{/* icon change based on case type */}
 				<Icon

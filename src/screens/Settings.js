@@ -41,7 +41,7 @@ export default function Settings() {
 			<View style={{ padding: 20 }}>
 				<Text style={[styles.headerText, { color: activeTheme.textColor.alternate }]}>Settings</Text>
 
-				<TouchableOpacity onPress={() => { toggleTheme() }}>
+				<TouchableOpacity activeOpacity={0.8} onPress={() => { toggleTheme() }}>
 					<View style={[styles.container, { backgroundColor: activeTheme.primaryColor }]}>
 						<MaterialCommunityIcons
 							name={activeTheme.darkTheme ? "lightbulb-on" : "lightbulb"}

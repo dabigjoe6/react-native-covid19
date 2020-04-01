@@ -39,7 +39,7 @@ export default function SummaryText(props) {
 
 	return (
 		<View style={{ marginVertical: 10, marginHorizontal: 20, backgroundColor: activeTheme.backgroundColor, padding: 10, elevation: 1, borderRadius: 10 }}>
-			<TouchableOpacity onPress={props.onPress}>
+			<TouchableOpacity activeOpacity={0.8} onPress={props.onPress}>
 				<AnimateNumber style={styles.text} value={props.text} formatter={(val) => {
 					return parseFloat(val).toFixed(0)
 				}}
