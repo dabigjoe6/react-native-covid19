@@ -4,6 +4,7 @@ import * as Animatable from 'react-native-animatable';
 import { PieChart } from 'react-native-chart-kit';
 import { SummaryText, DailyCard, Container, CountryCard } from '../components';
 import { theme } from '../context/Theme';
+import { location } from '../context/Location';
 
 import { base_url } from '../config';
 
@@ -12,6 +13,7 @@ export default function Main(props) {
 	const CustomPieChart = Animatable.createAnimatableComponent(PieChart);
 
 	const activeTheme = useContext(theme).globalTheme;
+	const currentLocation = useContext(location).locationContext;
 
 	const styles = {
 		summaryCard: {
@@ -60,30 +62,30 @@ export default function Main(props) {
 
 	const [dailyUpdate, setDailyUpdate] = useState([]);
 
-	const [ngLastUpdated, setNgLastUpdated] = useState("");
-	const [ngConfirmed, setNgConfirmed] = useState(0);
-	const [ngDeaths, setNgDeaths] = useState(0);
-	const [ngRecovered, setNgRecovered] = useState(0);
+	const [lastUpdated, setLastUpdated] = useState("");
+	const [confirmed, setConfirmed] = useState(0);
+	const [deaths, setDeaths] = useState(0);
+	const [recovered, setRecovered] = useState(0);
 
 	const [forceListRerender, setForceListRerender] = useState(false);
 
 	useEffect(() => {
 		fetchCases();
 		fetchDaily();
-		fetchNgData();
-
+		fetchLocationData();
 	}, [])
 
-	async function fetchNgData() {
-		let response = await fetch(base_url + '/countries/Nigeria');
+	async function fetchLocationData() {
+		console.log("Country name", currentLocation.country);
+		let response = await fetch(base_url + '/countries/' + currentLocation.country);
 
 		if (response.status == 200) {
 			let result = await response.json();
 
-			setNgLastUpdated(result.lastUpdate);
-			setNgConfirmed(result.confirmed.value);
-			setNgDeaths(result.deaths.value);
-			setNgRecovered(result.recovered.value);
+			setLastUpdated(result.lastUpdate);
+			setConfirmed(result.confirmed.value);
+			setDeaths(result.deaths.value);
+			setRecovered(result.recovered.value);
 		}
 	}
 	async function fetchDaily() {
@@ -160,7 +162,14 @@ export default function Main(props) {
 			</View>
 			<View style={{ marginTop: 20, paddingBottom: 100 }}>
 
-				<CountryCard country="Nigeria" lastUpdated={ngLastUpdated} confirmed={ngConfirmed} deaths={ngDeaths} recovered={ngRecovered} />
+				<CountryCard
+					country={currentLocation.country}
+					lastUpdated={lastUpdated}
+					confirmed={confirmed}
+					deaths={deaths}
+					recovered={recovered}
+				/>
+
 				<Text style={styles.dailyUpdatesText}>Recent Updates</Text>
 
 				<FlatList
