@@ -3,6 +3,7 @@ import { View, Text, FlatList, Image, ImageBackground, Dimensions } from 'react-
 import { Container } from '../components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { location } from '../context/Location';
+import { theme } from '../context/Theme';
 
 export default function News(props) {
 
@@ -12,6 +13,7 @@ export default function News(props) {
 
 	const currentLocation = useContext(location).locationContext;
 
+	const activeTheme = useContext(theme).globalTheme;
 
 	const WINDOW_WIDTH = Dimensions.get('window').width;
 
@@ -53,11 +55,12 @@ export default function News(props) {
 		},
 		title: {
 			fontSize: 17,
-			fontWeight: 'bold', color: 'white'
+			fontWeight: 'bold',
+			color: activeTheme.textColor.normal
 		},
 		description: {
 			fontSize: 14,
-			color: 'white'
+			color: activeTheme.textColor.normal
 		},
 		featuredFooter: {
 			flexDirection: 'row',
@@ -66,11 +69,11 @@ export default function News(props) {
 		},
 		source: {
 			fontSize: 11,
-			color: 'white'
+			color: activeTheme.textColor.normal
 		},
 		date: {
 			fontSize: 11,
-			color: 'white'
+			color: activeTheme.textColor.normal
 		},
 		itemContainer: {
 			flexDirection: 'row',
@@ -94,6 +97,9 @@ export default function News(props) {
 			alignItems: 'center',
 			flex: 1
 		},
+		featuredText: {
+			color: 'white'
+		}
 	}
 
 	function renderItem({ item, index }) {
@@ -110,11 +116,11 @@ export default function News(props) {
 					<ImageBackground source={{ uri: imageUrl }} style={{ justifyContent: 'flex-end', height: 300, width: WINDOW_WIDTH - 40, marginVertical: 10 }} imageStyle={{ borderRadius: 10 }}>
 						<View style={styles.overlay} />
 						<View style={styles.featuredTextContainer}>
-							<Text style={styles.title}>{item.title}</Text>
-							<Text style={styles.description} numberOfLines={2}>{item.description}</Text>
+							<Text style={[styles.title, styles.featuredText]}>{item.title}</Text>
+							<Text style={[styles.description, styles.featuredText]} numberOfLines={2}>{item.description}</Text>
 							<View style={styles.featuredFooter}>
-								<Text style={styles.source}>{item.source.name}</Text>
-								<Text style={styles.date}>{(new Date(item.publishedAt)).toDateString()}</Text>
+								<Text style={[styles.source, styles.featuredText]}>{item.source.name}</Text>
+								<Text style={[styles.date, styles.featuredText]}>{(new Date(item.publishedAt)).toDateString()}</Text>
 							</View>
 						</View>
 					</ImageBackground>
@@ -142,7 +148,7 @@ export default function News(props) {
 	}
 	return (
 		<Container>
-			<View>
+			<View style={{ paddingBottom: 100 }}>
 				<FlatList
 					data={news}
 					extraData={forceListRender}

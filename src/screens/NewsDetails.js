@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, Dimensions, ScrollView } from 'react-native';
 import { Container, BackBtn } from '../components';
+import { theme } from '../context/Theme';
 
 export default function NewsDetails(props) {
 
 	const WINDOW_WIDTH = Dimensions.get('window').width;
+
+	const activeTheme = useContext(theme).globalTheme;
+
 	let news = props.route.params.news;
 	let imageUrl = "http://www.traumasoft.com/wp-content/uploads/2018/09/main-news-and-events-banner.jpg"
 
@@ -23,18 +27,18 @@ export default function NewsDetails(props) {
 			padding: 15
 		},
 		title: {
-			color: 'white',
+			color: activeTheme.textColor.normal,
 			fontSize: 20,
 			fontWeight: 'bold',
 			marginBottom: 10
 		},
 		content: {
-			color: 'white',
+			color: activeTheme.textColor.normal,
 			fontSize: 14,
 			lineHeight: 25
 		},
 		footer: {
-			color: 'white',
+			color: activeTheme.textColor.normal,
 			fontSize: 11
 		}
 	}

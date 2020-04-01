@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Container, AdviceCard } from '../components';
-import { textColor } from '../config';
 import { theme } from '../context/Theme';
 
 export default function Advice(props) {

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { primaryColor, textColor } from '../config';
 import { theme } from '../context/Theme';
 
 export default function AdviceCard(props) {
@@ -19,7 +18,7 @@ export default function AdviceCard(props) {
 			padding: 20
 		},
 		regionText: {
-			color: 'white',
+			color: activeTheme.textColor.normal,
 			marginBottom: 5,
 			fontSize: 16
 		},
