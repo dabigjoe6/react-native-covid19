@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main, Cases, Advice, Prevention, Symptoms, HowItSpreads, Settings, WhatToDo } from './src/screens';
+import { Main, Cases, Advice, Prevention, Symptoms, HowItSpreads, Settings, WhatToDo, News } from './src/screens';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -47,6 +47,8 @@ export default function App() {
 								return <Entypo name="line-graph" color={iconColor} size={size} />
 							} else if (route.name === 'Advice') {
 								return <SimpleLineIcon name="notebook" color={iconColor} size={size} />
+							} else if (route.name === 'News') {
+								return <Entypo name="newsletter" color={iconColor} size={size} />
 							} else if (route.name === "Settings") {
 								return <SimpleLineIcon name="settings" color={iconColor} size={size} />
 							}
@@ -80,6 +82,7 @@ export default function App() {
 				>
 					<Tab.Screen name="Stats" component={StatsStack} />
 					<Tab.Screen name="Advice" component={AdviceStack} />
+					<Tab.Screen name="News" component={News} />
 					<Tab.Screen name="Settings" component={Settings} />
 				</Tab.Navigator>
 			</NavigationContainer>
