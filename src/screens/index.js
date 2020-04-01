@@ -6,3 +6,5 @@ export { default as Prevention } from './Prevention';
 export { default as Symptoms } from './Symptoms';
 export { default as Settings } from './Settings';
 export { default as WhatToDo } from './WhatToDo';
+export { default as News } from './News';
+export { default as NewsDetails } from './NewsDetails';

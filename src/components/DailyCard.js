@@ -37,7 +37,7 @@ export default function DailyCard(props) {
 				</View>
 			</View>
 			<View style={{ flex: 6 }}>
-				<Text style={{ color: activeTheme.textColor.normal }}>{(new Date(props.case.reportDateString)).toDateString()}</Text>
+				<Text style={{ color: activeTheme.textColor.normal }}>{(new Date(props.case.reportDate)).toDateString()}</Text>
 				<View style={{ flexDirection: 'row' }}>
 					<CaseStateText
 						state="Confirmed"
