@@ -79,6 +79,8 @@ export default function Main(props) {
 		console.log("Country name", currentLocation.country);
 		let response = await fetch(base_url + '/countries/' + currentLocation.country);
 
+		console.log("COUNTRY", currentLocation.country);
+
 		if (response.status == 200) {
 			let result = await response.json();
 
