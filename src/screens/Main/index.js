@@ -1,10 +1,11 @@
 import * as Animatable from 'react-native-animatable';
 
-import {Container, CountryCard, DailyCard, SummaryText} from '../../components';
+import {Container, CountryCard, DailyCard} from '../../components';
 import {FlatList, Text, View} from 'react-native';
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 
 import {PieChart} from 'react-native-chart-kit';
+import {SummaryText} from './components';
 import {base_url} from '../../config';
 import {location} from '../../context/Location';
 import {styles} from './styles';
@@ -60,7 +61,7 @@ export default function Main(props) {
       base_url + '/countries/' + currentLocation.country,
     );
 
-    console.log('COUNTRY', currentLocation.country);
+    // console.log('COUNTRY', currentLocation.country);
 
     if (response.status === 200) {
       let result = await response.json();
