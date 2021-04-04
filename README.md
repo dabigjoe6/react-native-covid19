@@ -34,8 +34,8 @@ https://drive.google.com/file/d/15QFX5BbHk5dYeUjijdsccI2x_MpBgg1O/view
 Ps: Ignore the glitchy GIF, the app is much sleeker, trust me 😉
 
 # 🤓 Contributor(s)
-- Joseph Olabisi [![Twitter Follow](https://img.shields.io/twitter/follow/aceg00ber?label=Follow&style=social)](https://twitter.com/acerg00ber)
-- Oyefeso Oluwatunmise [![Twitter Follow](https://img.shields.io/twitter/follow/oyefesotunmise?label=Follow&style=social)](https://twitter.com/oyefesotunmise)
+- Joseph Olabisi [![Twitter Follow](https://img.shields.io/twitter/follow/olawwwale?label=Follow&style=social)](https://twitter.com/olawwwale)
+- Oyefeso Oluwatunmise [![Twitter Follow](https://img.shields.io/twitter/follow/tunmiseoyefeso?label=Follow&style=social)](https://twitter.com/tunmiseoyefeso)
 
 # 🧾 License - MIT License
 Copyright (c) 2020 Vironitor - Released under the <a href="https://github.com/Blac-Panda/react-native-covid19/blob/master/LICENSE.txt">MIT license.</a>
