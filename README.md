@@ -34,7 +34,7 @@ https://drive.google.com/file/d/15QFX5BbHk5dYeUjijdsccI2x_MpBgg1O/view
 Ps: Ignore the glitchy GIF, the app is much sleeker, trust me 😉
 
 # 🤓 Contributor(s)
-- Joseph Olabisi [![Twitter Follow](https://img.shields.io/twitter/follow/aceg00ber?label=Follow&style=social)](https://twitter.com/acerg00ber)
+- Joseph Olabisi [![Twitter Follow](https://img.shields.io/twitter/follow/olawwwale?label=Follow&style=social)](https://twitter.com/olawwwale)
 - Oyefeso Oluwatunmise [![Twitter Follow](https://img.shields.io/twitter/follow/oyefesotunmise?label=Follow&style=social)](https://twitter.com/oyefesotunmise)
 
 # 🧾 License - MIT License
