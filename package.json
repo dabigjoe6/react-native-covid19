@@ -24,7 +24,7 @@
     "react-native-maps": "0.27.0",
     "react-native-parallax": "^0.3.0",
     "react-native-push-notification": "^3.1.9",
-    "react-native-reanimated": "^1.7.0",
+    "react-native-reanimated": "^2.10.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.3.0",
     "react-native-snap-carousel": "^3.8.4",
